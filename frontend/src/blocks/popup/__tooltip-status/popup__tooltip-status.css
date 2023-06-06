@@ -1,0 +1,6 @@
+.popup__tooltip-status {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 60px 36px;
+}

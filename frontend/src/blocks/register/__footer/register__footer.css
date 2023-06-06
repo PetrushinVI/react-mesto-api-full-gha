@@ -1,0 +1,11 @@
+.register__footer {
+  display: flex;
+  align-items: center;
+  font-family: 'Inter';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  justify-content: center;
+  line-height: 17px;
+  text-align: center;
+}

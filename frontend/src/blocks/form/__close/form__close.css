@@ -1,0 +1,28 @@
+.form__close {
+  position: absolute;
+  top: -76px;
+  right: -77px;
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+  background-image: url("../../../images/CloseIcon2.svg");
+  background-repeat: no-repeat;
+  background-size: 32px 32px;
+  background-position: center;
+  border-color: transparent;
+}
+
+@media screen and (max-width: 528px) {
+  .form__close {
+    top: -61px;
+    right: -22px;
+    width: 20px;
+    height: 20px;
+    background-size: 20px 20px;
+  }
+}
+
+.form__close:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}

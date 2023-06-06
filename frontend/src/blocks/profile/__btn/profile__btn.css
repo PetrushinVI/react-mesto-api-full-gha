@@ -1,0 +1,26 @@
+.profile__btn {
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  border: 1px solid white;
+  margin-left: 18px;
+  background-image: url("../../../images/pencill.svg");
+  background-size: 10px 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+}
+
+@media screen and (max-width: 703px) {
+  .profile__btn {
+    margin-left: 10px;
+    width: 18px;
+    height: 18px;
+    background-size: 5.25px 5.25px;
+  }
+}
+
+.profile__btn:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}

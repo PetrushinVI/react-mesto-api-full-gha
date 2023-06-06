@@ -1,0 +1,21 @@
+.element__picture {
+  display: flex;
+  position: relative;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 100%;
+  background-position: center;
+  aspect-ratio: 1 / 1;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  z-index: 1;
+  background-size: cover;
+  cursor: pointer;
+  transition: opacity;
+}
+
+.element__picture:hover {
+  opacity: 0.9;
+  transition: 0.5s;
+}

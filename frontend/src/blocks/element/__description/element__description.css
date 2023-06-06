@@ -1,0 +1,9 @@
+.element__description {
+  display: flex;
+  justify-content: space-between;
+  margin: 19px 15px 19px 21px;
+  align-items: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
