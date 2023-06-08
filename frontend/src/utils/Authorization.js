@@ -6,6 +6,7 @@ export const register = (email, password) => {
         credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
         },
         body: JSON.stringify({email, password}),
     })

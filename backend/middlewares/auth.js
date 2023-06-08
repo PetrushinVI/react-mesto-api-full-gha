@@ -5,6 +5,9 @@ const Unauthorized = (req, res, next) => next(new AuthError('Необходим�
 
 const auth = (req, res, next) => {
   const token = req.cookies.jwt;
+  if (!token) {
+    return Unauthorized(req, res, next);
+  }
   let payload;
   try {
     payload = jwt.verify(token, 'secret-key');
