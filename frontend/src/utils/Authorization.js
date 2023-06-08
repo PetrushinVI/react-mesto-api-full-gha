@@ -3,6 +3,7 @@ export const URL = 'https://auth.nomoreparties.co';
 export const register = (email, password) => {
     return fetch(`${URL}/signup`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -14,6 +15,7 @@ export const register = (email, password) => {
 export const login = (email, password) => {
     return fetch(`${URL}/signin`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -25,6 +27,7 @@ export const login = (email, password) => {
 export const checkToken = (jwt) => {
     return fetch(`${URL}/users/me`, {
         method: 'GET',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
             "Authorization": `Bearer ${jwt}`

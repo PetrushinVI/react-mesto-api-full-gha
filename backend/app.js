@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 const router = require('./routes/index');
@@ -10,6 +11,20 @@ const { signInValidation, signUpValidation } = require('./middlewares/validation
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
+
+app.use(cors({
+  origin: ['http://localhost:3001',
+    'http://localhost:3000',
+    'https://api-petrushin.nomoredomains.rocks',
+    'http://api-petrushin.nomoredomains.rocks',
+    'https://petrushin.nomoredomains.rocks',
+    'http://petrushin.nomoredomains.rocks'],
+  credentials: true,
+  preflightContinue: false,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  allowedHeaders: ['Content-Type', 'Authorization', 'Origin'],
+  optionsSuccessStatus: 204,
+}));
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,

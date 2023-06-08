@@ -8,6 +8,7 @@ class Api {
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
             method: "GET",
+            credentials: 'include',
             headers: this._headers,
         })
             .then(this._checkResponse);
@@ -23,6 +24,7 @@ class Api {
 
     getInitialCard() {
         return fetch(`${this._baseUrl}/cards`, {
+            credentials: 'include',
             headers: this._headers,
         })
             .then(this._checkResponse);
@@ -31,6 +33,7 @@ class Api {
     editUserInfo(userData) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
+            credentials: 'include',
             headers: this._headers,
             body: JSON.stringify({
                 name: userData.name,
@@ -46,6 +49,7 @@ class Api {
     addCard(cardData) {
         return fetch(`${this._baseUrl}/cards`, {
             method: 'POST',
+            credentials: 'include',
             headers: this._headers,
             body: JSON.stringify({
                 name: cardData.name,
@@ -61,6 +65,7 @@ class Api {
     deleteCard(id) {
         return fetch(`${this._baseUrl}/cards/${id}`, {
             method: "DELETE",
+            credentials: 'include',
             headers: this._headers,
         })
             .then(this._checkResponse);
@@ -69,6 +74,7 @@ class Api {
     editUserAvatar(body) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {
             method: "PATCH",
+            credentials: 'include',
             headers: this._headers,
             body: JSON.stringify({avatar: body}),
         })
@@ -78,6 +84,7 @@ class Api {
     addLike(id) {
         return fetch(`${this._baseUrl}/cards/${id}/likes`, {
             method: "PUT",
+            credentials: 'include',
             headers: this._headers,
         })
             .then(this._checkResponse);
@@ -86,6 +93,7 @@ class Api {
     changeLikeCardStatus(cardId, isLike) {
         return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
             method: isLike ? 'DELETE' : 'PUT',
+            credentials: 'include',
             headers: this._headers
         })
             .then(res => this._checkResponse(res))
