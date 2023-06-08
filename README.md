@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 84.201.165.190
+IP 84.201.165.190
 
 Frontend https://petrushin.nomoredomains.rocks
 
