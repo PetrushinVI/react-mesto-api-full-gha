@@ -1,4 +1,4 @@
-export const URL = 'https://auth.nomoreparties.co';
+export const URL = 'https://api-petrushin.nomoredomains.rocks';
 
 export const register = (email, password) => {
     return fetch(`${URL}/signup`, {

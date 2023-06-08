@@ -104,9 +104,8 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-60',
+    baseUrl: 'https://api-petrushin.nomoredomains.rocks',
     headers: {
-        authorization: '4515d0f2-bb83-494a-804c-6a6db4ace47a',
         'Content-Type': 'application/json'
     }
 });
