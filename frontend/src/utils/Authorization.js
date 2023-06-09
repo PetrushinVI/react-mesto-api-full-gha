@@ -18,20 +18,22 @@ export const login = (email, password) => {
         method: 'POST',
         credentials: 'include',
         headers: {
+            'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({email, password}),
+        sameSite: 'none',
     })
         .then(checkResponse)
 };
 
-export const checkToken = (jwt) => {
+export const checkToken = () => {
     return fetch(`${URL}/users/me`, {
         method: 'GET',
         credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
-            "Authorization": `Bearer ${jwt}`
+            // "Authorization": `Bearer ${jwt}`
         },
     })
         .then(checkResponse);

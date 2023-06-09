@@ -34,43 +34,55 @@ function App() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const jwt = localStorage.getItem('jwt');
-        if (jwt) {
-            authorization.checkToken(jwt)
+        const userId = localStorage.getItem('userId');
+        // const jwt = localStorage.getItem('jwt');
+        if (userId) {
+            authorization.checkToken(userId)
                 .then((res) => {
                     if (res) {
                         setIsLoggedIn(true);
-                        setIsEmail(res.data.email);
-                        navigate("/");
+                        setIsEmail(res.email);
+                        // setIsEmail(res.data.email);
+                        // navigate("/");
+                        navigate('/', { replace: true });
                     }
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => {
+                    localStorage.removeItem('userId');
+                    console.log(err)
+                });
         }
     }, [navigate]);
 
     useEffect(() => {
-        Promise.all([api.getUserInfo()
-            , api.getInitialCard()
-        ])
-            .then(([userData, cardData]) => {
-                setCurrentUser(userData);
-                setCards(cardData);
-            })
-            .catch((err) => console.log(`${err}`))
-    }, [])
+        const userId = localStorage.getItem('userId');
+        if (userId) {
+            Promise.all([api.getUserInfo()
+                , api.getInitialCard()
+            ])
+                .then(([userData, cardData]) => {
+                    setCurrentUser(userData);
+                    setCards(cardData);
+                })
+                .catch((err) => console.log(`${err}`));
+        }
+    }, [navigate]);
 
     const handleRegister = (email, password) => {
         authorization.register(email, password)
             .then((res) => {
-                localStorage.setItem('jwt', res.jwt);
-                localStorage.setItem('email', res.email);
-                setPopupStatus({
-                    image: UnionOk,
-                    message: 'Вы успешно зарегистрировались!'
-                });
-                navigate("/sign-in");
-                setIsLoggedIn(true);
-                setIsEmail(res.data.email);
+                // localStorage.setItem('jwt', res.jwt);
+                // localStorage.setItem('email', res.email);
+                if (res) {
+                    setPopupStatus({
+                        image: UnionOk,
+                        message: 'Вы успешно зарегистрировались!'
+                    });
+                    navigate("/sign-in");
+                    setIsLoggedIn(true);
+                    setIsEmail(res.email);
+                    // setIsEmail(res.data.email);
+                }
             })
             .catch(() => {
                 setPopupStatus({
@@ -84,10 +96,12 @@ function App() {
     const handleLogin = (email, password) => {
         authorization.login(email, password)
             .then((res) => {
-                localStorage.setItem('jwt', res.token);
-                localStorage.setItem('email', res.email);
+                // localStorage.setItem('jwt', res.token);
+                // localStorage.setItem('email', res.email);
+                localStorage.setItem('userId', res._id);
                 setIsLoggedIn(true);
-                setIsEmail(email);
+                setIsEmail(res.email);
+                // setIsEmail(email);
                 navigate("/")
             })
             .catch((err) => {
@@ -97,11 +111,14 @@ function App() {
     };
 
     const handleLoggedOut = () => {
-        localStorage.removeItem('jwt');
-        localStorage.removeItem('email');
+        // localStorage.removeItem('jwt');
+        // localStorage.removeItem('email');
+        localStorage.removeItem('userId');
         setIsLoggedIn(false);
         setIsEmail(null);
-        navigate("/");
+        setCards([]);
+        navigate('/', { replace: true });
+        // navigate("/");
     };
 
     const handleCardLike = (card) => {

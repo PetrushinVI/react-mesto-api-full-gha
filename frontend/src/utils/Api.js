@@ -11,7 +11,7 @@ class Api {
             credentials: 'include',
             headers: this._headers,
         })
-            .then(this._checkResponse);
+            .then(this._checkResponse(res));
     }
 
     _checkResponse(res) {
@@ -24,10 +24,12 @@ class Api {
 
     getInitialCard() {
         return fetch(`${this._baseUrl}/cards`, {
+            method: 'GET',
             credentials: 'include',
-            headers: this._headers,
+            headers: {
+            },
         })
-            .then(this._checkResponse);
+            .then(res => this._checkResponse(res));
     }
 
     editUserInfo(userData) {
@@ -66,9 +68,10 @@ class Api {
         return fetch(`${this._baseUrl}/cards/${id}`, {
             method: "DELETE",
             credentials: 'include',
-            headers: this._headers,
+            headers: {
+            }
         })
-            .then(this._checkResponse);
+            .then(res => this._checkResponse(res));
     }
 
     editUserAvatar(body) {
@@ -76,9 +79,9 @@ class Api {
             method: "PATCH",
             credentials: 'include',
             headers: this._headers,
-            body: JSON.stringify({avatar: body}),
+            body: JSON.stringify({avatar: body.avatar}),
         })
-            .then(this._checkResponse);
+            .then(res => this._checkResponse(res));
     }
 
     addLike(id) {
@@ -87,7 +90,7 @@ class Api {
             credentials: 'include',
             headers: this._headers,
         })
-            .then(this._checkResponse);
+            .then(res => this._checkResponse(res));
     }
 
     changeLikeCardStatus(cardId, isLike) {

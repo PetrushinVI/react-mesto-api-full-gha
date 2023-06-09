@@ -7,8 +7,8 @@ const auth = require('../middlewares/auth');
 
 router.use('/users', auth, usersRouter);
 router.use('/cards', auth, cardsRouter);
-router.use('*', auth, () => {
-  throw new NotFoundError('Запрашиваемый ресурс не найден');
+router.use('*', auth, (req, res, next) => {
+  next(new NotFoundError('Запрашиваемый ресурс не найден'));
 });
 
 module.exports = router;
