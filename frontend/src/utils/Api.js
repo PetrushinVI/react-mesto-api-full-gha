@@ -11,7 +11,7 @@ class Api {
             credentials: 'include',
             headers: this._headers,
         })
-            .then(this._checkResponse(res));
+            .then(this._checkResponse);
     }
 
     _checkResponse(res) {
