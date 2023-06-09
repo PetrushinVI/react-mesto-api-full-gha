@@ -50,8 +50,6 @@ module.exports.addLike = (req, res, next) => {
   cardSchema
     .findByIdAndUpdate(
       cardId,
-      // req.params.cardId,
-      // { $addToSet: { likes: req.user._id } },
       { $addToSet: { likes: _id } },
       { new: true },
     )
@@ -62,7 +60,6 @@ module.exports.addLike = (req, res, next) => {
         return next(new NotFound('Карточка с указанным _id не найдена'));
       }
       return res.status(200).json(card);
-
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -86,8 +83,6 @@ module.exports.deleteLike = (req, res, next) => {
         return next(new NotFound('Карточка с указанным _id не найдена'));
       }
       return res.json(card);
-      // return res.status(200)
-      //   .send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
