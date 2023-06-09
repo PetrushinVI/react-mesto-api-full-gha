@@ -18,7 +18,8 @@ module.exports.getUserById = (req, res, next) => {
   userSchema.findById(userId)
     .then((user) => {
       if (user) {
-        res.send({ data: user });
+        res.send(user);
+        // res.send({ data: user });
       } else {
         throw new NotFound('Пользователь по указанному _id не найден');
       }
@@ -97,8 +98,12 @@ module.exports.updateUser = (req, res, next) => {
       runValidators: true,
     },
   )
-    .then((user) => res.status(200)
-      .send(user))
+    .then((user) => {
+      if (!user) {
+        throw new NotFound('Пользователь по указанному _id не найден');
+      }
+      return res.status(200).send(user);
+    })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
         next(new BadRequest('Переданы некорректные данные'));
@@ -119,8 +124,12 @@ module.exports.updateAvatar = (req, res, next) => {
       runValidators: true,
     },
   )
-    .then((user) => res.status(200)
-      .send(user))
+    .then((user) => {
+      if (!user) {
+        throw new NotFound('Пользователь по указанному _id не найден');
+      }
+      return res.status(200).send(user);
+    })
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
         next(new BadRequest('Переданы некорректные данные'));
