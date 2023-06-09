@@ -79,7 +79,7 @@ class Api {
             method: "PATCH",
             credentials: 'include',
             headers: this._headers,
-            body: JSON.stringify({avatar: body.avatar}),
+            body: JSON.stringify({avatar: body}),
         })
             .then(res => this._checkResponse(res));
     }
