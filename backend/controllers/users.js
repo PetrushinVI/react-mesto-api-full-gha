@@ -140,10 +140,10 @@ module.exports.login = (req, res, next) => {
         .cookie('jwt', token, {
           maxAge: 3600000 * 24 * 7,
           httpOnly: true,
-          // sameSite: 'none',
-          // secure: true,
-          sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'Lax',
-           secure: process.env.NODE_ENV === 'production',
+          sameSite: 'none',
+          secure: true,
+          // sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'Lax',
+          //  secure: process.env.NODE_ENV === 'production',
         })
         // .send({ token });
         .send(user.toJSON());
