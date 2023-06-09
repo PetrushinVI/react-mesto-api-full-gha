@@ -5,6 +5,8 @@ const BadRequest = require('../errors/badRequest');
 const NotFound = require('../errors/notFound');
 const ConflictError = require('../errors/conflictError');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 module.exports.getUsers = (req, res, next) => {
   userSchema.find({})
     .then((users) => res.send(users))
@@ -138,8 +140,10 @@ module.exports.login = (req, res, next) => {
         .cookie('jwt', token, {
           maxAge: 3600000 * 24 * 7,
           httpOnly: true,
-          sameSite: 'none',
-          secure: true,
+          // sameSite: 'none',
+          // secure: true,
+          sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'Lax',
+           secure: process.env.NODE_ENV === 'production',
         })
         // .send({ token });
         .send(user.toJSON());
