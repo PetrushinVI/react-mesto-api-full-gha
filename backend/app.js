@@ -40,9 +40,9 @@ app.use(cookieParser());
 
 const { PORT = 3000 } = process.env;
 
-app.use(limiter);
-
 app.use(requestLogger);
+
+app.use(limiter);
 
 app.get('/crash-test', () => {
   setTimeout(() => {

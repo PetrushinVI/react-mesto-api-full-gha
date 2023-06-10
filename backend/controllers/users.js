@@ -140,7 +140,6 @@ module.exports.updateAvatar = (req, res, next) => {
 
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
-  console.log(process.env.NODE_ENV);
   userSchema
     .findUserByCredentials(email, password)
     .then((user) => {
@@ -152,7 +151,7 @@ module.exports.login = (req, res, next) => {
           sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'Lax',
           secure: process.env.NODE_ENV === 'production',
         })
-        .send(user.toJSON());
+        .send({ token });
     })
     .catch(next);
 };

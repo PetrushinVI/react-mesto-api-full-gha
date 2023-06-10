@@ -56,9 +56,6 @@ module.exports.addLike = (req, res, next) => {
     .populate(['owner', 'likes'])
     .orFail(() => new NotFound('Указанный _id не найден'))
     .then((card) => {
-      if (!card) {
-        return next(new NotFound('Карточка с указанным _id не найдена'));
-      }
       return res.status(200).json(card);
     })
     .catch((err) => {
@@ -79,9 +76,6 @@ module.exports.deleteLike = (req, res, next) => {
     .populate(['owner', 'likes'])
     .orFail(() => new NotFound('Указанный _id не найден'))
     .then((card) => {
-      if (!card) {
-        return next(new NotFound('Карточка с указанным _id не найдена'));
-      }
       return res.json(card);
     })
     .catch((err) => {
