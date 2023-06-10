@@ -55,9 +55,7 @@ module.exports.addLike = (req, res, next) => {
     )
     .populate(['owner', 'likes'])
     .orFail(() => new NotFound('Указанный _id не найден'))
-    .then((card) => {
-      return res.status(200).json(card);
-    })
+    .then((card) => res.status(200).json(card))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new BadRequest('Переданы некорректные данные'));
@@ -75,9 +73,7 @@ module.exports.deleteLike = (req, res, next) => {
   )
     .populate(['owner', 'likes'])
     .orFail(() => new NotFound('Указанный _id не найден'))
-    .then((card) => {
-      return res.json(card);
-    })
+    .then((card) => res.json(card))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new BadRequest('Переданы некорректные данные'));
